@@ -1,0 +1,15 @@
+/* src/pages/Jobs.css */
+.jobs {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .jobs h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+  
+  .jobs p {
+    font-size: 1.2em;
+  }
+  
