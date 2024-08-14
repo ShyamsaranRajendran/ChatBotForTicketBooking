@@ -46,10 +46,19 @@ app.use((req, res, next) => {
 
 
 // Importing routers
-const pagesRouter = require('./routes/pages.js');
+// const pagesRouter = require('./routes/pages.js');
 
 // Use routers as middleware
-app.use('/', pagesRouter);
+// app.use('/', pagesRouter);
+// Example in Node.js/Express
+app.post('/api/filter-jobs', (req, res) => {
+  const { salaryRange, skills, deadline } = req.body;
+  console.log(req.body);
+  // Logic to filter jobs based on the received data
+  // ...
+
+  res.json(filteredJobs);
+});
 
 const port = process.env.PORT || 4000;
 
