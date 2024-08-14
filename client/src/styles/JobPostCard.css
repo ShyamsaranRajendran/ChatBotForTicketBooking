@@ -1,0 +1,29 @@
+.job-post-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .job-post-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .job-post-card h3 {
+    margin-top: 0;
+    font-size: 1.25em;
+    color: #333;
+  }
+  
+  .job-post-card p {
+    margin: 10px 0;
+    color: #666;
+  }
+  
+  .job-post-card p strong {
+    color: #333;
+  }
+  
