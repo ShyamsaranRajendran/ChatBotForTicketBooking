@@ -1,35 +1,34 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function SkillsFilter({ onChange }) {
-  const [selectedSkills, setSelectedSkills] = useState([]);
-
-  const handleCheckboxChange = (event) => {
+function SkillsFilter({ selectedSkills, setSelectedSkills }) {
+  const handleChange = (event) => {
     const value = event.target.value;
-    const updatedSkills = selectedSkills.includes(value)
-      ? selectedSkills.filter((skill) => skill !== value)
-      : [...selectedSkills, value];
+    const isChecked = event.target.checked;
 
-    setSelectedSkills(updatedSkills);
-    onChange(updatedSkills); // Pass selected skills to parent component
+    if (isChecked) {
+      setSelectedSkills([...selectedSkills, value]);
+    } else {
+      setSelectedSkills(selectedSkills.filter((skill) => skill !== value));
+    }
   };
 
   return (
     <div className="filter-group">
       <h4>Skills</h4>
       <label>
-        <input type="checkbox" value="JavaScript" onChange={handleCheckboxChange} />
+        <input type="checkbox" value="JavaScript" onChange={handleChange} />
         JavaScript
       </label>
       <label>
-        <input type="checkbox" value="React" onChange={handleCheckboxChange} />
+        <input type="checkbox" value="React" onChange={handleChange} />
         React
       </label>
       <label>
-        <input type="checkbox" value="Node.js" onChange={handleCheckboxChange} />
+        <input type="checkbox" value="Node.js" onChange={handleChange} />
         Node.js
       </label>
       <label>
-        <input type="checkbox" value="Python" onChange={handleCheckboxChange} />
+        <input type="checkbox" value="Python" onChange={handleChange} />
         Python
       </label>
     </div>

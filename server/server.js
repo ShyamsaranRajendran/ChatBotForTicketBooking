@@ -7,9 +7,9 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 const expressMessages = require('express-messages');
-const { body } = require('express-validator');
+const cors = require('cors'); // Import cors
 
-mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true }); 
+mongoose.connect(config.database, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
@@ -18,6 +18,9 @@ db.once('open', function () {
 });
 
 const app = express();
+
+// Use CORS middleware
+app.use(cors()); // Enable CORS for all routes
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -44,20 +47,12 @@ app.use((req, res, next) => {
   next();
 });
 
-
-// Importing routers
-// const pagesRouter = require('./routes/pages.js');
-
-// Use routers as middleware
-// app.use('/', pagesRouter);
-// Example in Node.js/Express
+// API Route
 app.post('/api/filter-jobs', (req, res) => {
   const { salaryRange, skills, deadline } = req.body;
   console.log(req.body);
-  // Logic to filter jobs based on the received data
-  // ...
-
-  res.json(filteredJobs);
+  // Here you would filter jobs based on the data and return the results
+  res.json({ message: 'Filtered jobs would be returned here.' });
 });
 
 const port = process.env.PORT || 4000;

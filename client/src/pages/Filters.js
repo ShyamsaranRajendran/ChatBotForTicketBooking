@@ -5,35 +5,18 @@ import DeadlineFilter from '../components/DeadLine';
 import '../styles/Filters.css';
 
 function Filters() {
-  const [salaryRange, setSalaryRange] = useState([]);
-  const [skills, setSkills] = useState([]);
-  const [deadline, setDeadline] = useState(null);
+  const [selectedSalaryRanges, setSelectedSalaryRanges] = useState([]);
+  const [selectedSkills, setSelectedSkills] = useState([]);
+  const [selectedDeadlines, setSelectedDeadlines] = useState([]);
 
-  const handleFilterChange = (filterType, value) => {
-    switch (filterType) {
-      case 'salary':
-        setSalaryRange(value);
-        break;
-      case 'skills':
-        setSkills(value);
-        break;
-      case 'deadline':
-        setDeadline(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const applyFilters = () => {
+  const handleFilterSubmit = () => {
     const filters = {
-      salaryRange,
-      skills,
-      deadline,
+      salaryRange: selectedSalaryRanges,
+      skills: selectedSkills,
+      deadline: selectedDeadlines,
     };
 
-    // Sending the filter data to the backend
-    fetch('/api/filter-jobs', {
+    fetch('http://localhost:4000/api/filter-jobs', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -42,21 +25,17 @@ function Filters() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('Filtered jobs:', data);
-        // Handle the filtered job data here (e.g., update the UI)
-      })
-      .catch((error) => {
-        console.error('Error fetching filtered jobs:', error);
+        console.log(data); // Handle the filtered data
       });
   };
 
   return (
     <div className="filters">
       <h3>Filter Jobs</h3>
-      <SalaryFilter onChange={(value) => handleFilterChange('salary', value)} />
-      <SkillsFilter onChange={(value) => handleFilterChange('skills', value)} />
-      <DeadlineFilter onChange={(value) => handleFilterChange('deadline', value)} />
-      <button onClick={applyFilters}>Apply Filters</button>
+      <SalaryFilter selectedSalaryRanges={selectedSalaryRanges} setSelectedSalaryRanges={setSelectedSalaryRanges} />
+      <SkillsFilter selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills} />
+      <DeadlineFilter selectedDeadlines={selectedDeadlines} setSelectedDeadlines={setSelectedDeadlines} />
+      <button onClick={handleFilterSubmit}>Apply Filters</button>
     </div>
   );
 }
